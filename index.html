@@ -6,15 +6,38 @@
   <title>ARCHI BUILD — Premier House Building Agency</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <!-- React 18 + ReactDOM via CDN -->
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <!-- Babel Standalone for JSX -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
   <style>
-    @font-face{font-family:'DuneRise';src:url('https://db.onlinewebfonts.com/t/dune-rise.woff2') format('woff2'),url('https://db.onlinewebfonts.com/t/dune-rise.woff') format('woff');font-display:swap;}
-    :root{--bg-0:#ffffff;--bg-1:#f8f6f2;--bg-2:#f2efe9;--bg-3:#ece8e0;--text-primary:#1a1612;--text-secondary:#5a5450;--text-muted:#9a948e;--gold:#b8922a;--gold-light:#d4a843;--gold-pale:#f5e9cc;--gold-bg:#fdf7eb;--border:rgba(184,146,42,0.18);--border-soft:rgba(26,22,18,0.08);--shadow-sm:0 2px 12px rgba(26,22,18,0.07);--shadow-md:0 8px 40px rgba(26,22,18,0.10);--shadow-lg:0 24px 80px rgba(26,22,18,0.14);--radius-pill:999px;--radius-card:20px;--radius-btn:12px;--glass-bg:rgba(255,255,255,0.60);--glass-border:rgba(255,255,255,0.80);--glass-shadow:0 8px 32px rgba(26,22,18,0.10),0 1.5px 0 rgba(255,255,255,0.9) inset;--glass-blur:blur(28px) saturate(1.8);}
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+    @font-face {
+      font-family: 'DuneRise';
+      src: url('https://db.onlinewebfonts.com/t/dune-rise.woff2') format('woff2'),
+           url('https://db.onlinewebfonts.com/t/dune-rise.woff') format('woff');
+      font-display: swap;
+    }
+    :root {
+      --bg-0:#ffffff; --bg-1:#f8f6f2; --bg-2:#f2efe9; --bg-3:#ece8e0;
+      --text-primary:#1a1612; --text-secondary:#5a5450; --text-muted:#9a948e;
+      --gold:#b8922a; --gold-light:#d4a843; --gold-pale:#f5e9cc; --gold-bg:#fdf7eb;
+      --border:rgba(184,146,42,0.18); --border-soft:rgba(26,22,18,0.08);
+      --shadow-sm:0 2px 12px rgba(26,22,18,0.07);
+      --shadow-md:0 8px 40px rgba(26,22,18,0.10);
+      --shadow-lg:0 24px 80px rgba(26,22,18,0.14);
+      --radius-pill:999px; --radius-card:20px; --radius-btn:12px;
+      --glass-bg:rgba(255,255,255,0.60);
+      --glass-border:rgba(255,255,255,0.80);
+      --glass-shadow:0 8px 32px rgba(26,22,18,0.10),0 1.5px 0 rgba(255,255,255,0.9) inset;
+      --glass-blur:blur(28px) saturate(1.8);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
     body{background:var(--bg-1);color:var(--text-primary);font-family:'Inter',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
-    ::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg-1);}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
+    ::-webkit-scrollbar{width:3px;} ::-webkit-scrollbar-track{background:var(--bg-1);} ::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
     #loader{position:fixed;inset:0;background:var(--bg-0);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.9s,visibility 0.9s;}
     #loader.hidden{opacity:0;visibility:hidden;}
     .loader-logo{font-family:'DuneRise','Cinzel',serif;font-size:28px;letter-spacing:10px;color:var(--text-primary);text-transform:uppercase;margin-bottom:36px;}
@@ -28,15 +51,15 @@
     nav::before{content:'';position:absolute;inset:0;border-radius:var(--radius-pill);background:linear-gradient(135deg,rgba(255,255,255,0.55) 0%,rgba(255,255,255,0.10) 50%,rgba(255,255,255,0.30) 100%);pointer-events:none;}
     nav.scrolled{background:rgba(255,255,255,0.75);box-shadow:0 12px 48px rgba(26,22,18,0.14),0 1px 0 rgba(255,255,255,1) inset,0 0 0 0.5px rgba(255,255,255,0.6) inset;}
     .nav-logo{font-family:'DuneRise','Cinzel',serif;font-size:16px;letter-spacing:5px;color:var(--text-primary);text-decoration:none;font-weight:700;text-transform:uppercase;position:relative;z-index:1;}
-    .nav-logo span,.nav-links a,.nav-cta{color:var(--gold);font-size:12px;font-weight:500;}
+    .nav-logo span{color:var(--gold);}
     .nav-links{display:flex;gap:4px;list-style:none;position:relative;z-index:1;}
-    .nav-links a{letter-spacing:0.5px;color:var(--text-secondary);text-decoration:none;padding:8px 16px;border-radius:var(--radius-pill);transition:all 0.25s;}
+    .nav-links a{font-size:12px;font-weight:500;letter-spacing:0.5px;color:var(--text-secondary);text-decoration:none;padding:8px 16px;border-radius:var(--radius-pill);transition:all 0.25s;}
     .nav-links a:hover{color:var(--text-primary);background:rgba(26,22,18,0.06);}
-    .nav-cta{font-weight:600;letter-spacing:0.3px;color:#fff!important;background:linear-gradient(135deg,var(--gold-light),var(--gold));padding:10px 24px;border-radius:var(--radius-pill);text-decoration:none;border:none;cursor:pointer;box-shadow:0 4px 16px rgba(184,146,42,0.35),0 1px 0 rgba(255,255,255,0.3) inset;transition:all 0.25s;position:relative;z-index:1;}
+    .nav-cta{font-size:12px;font-weight:600;letter-spacing:0.3px;color:#fff;background:linear-gradient(135deg,var(--gold-light),var(--gold));padding:10px 24px;border-radius:var(--radius-pill);text-decoration:none;border:none;cursor:pointer;box-shadow:0 4px 16px rgba(184,146,42,0.35),0 1px 0 rgba(255,255,255,0.3) inset;transition:all 0.25s;position:relative;z-index:1;}
     .nav-cta:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(184,146,42,0.45),0 1px 0 rgba(255,255,255,0.3) inset;}
     #hero{position:relative;height:100vh;min-height:700px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
     .hero-video-wrap{position:absolute;inset:-20%;z-index:0;will-change:transform;}
-    #bgVideo{width:100%;height:100%;object-fit:cover;}
+    #bgVideo{width:100%;height:100%;object-fit:cover;background:linear-gradient(135deg,#0a0804 0%,#1a1008 20%,#2a1a0a 40%,#1a1208 60%,#0f0c06 80%,#080604 100%);}
     .hero-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,252,245,0.72) 0%,rgba(255,248,235,0.55) 40%,rgba(245,240,228,0.68) 100%);z-index:1;}
     .hero-fade-bottom{position:absolute;bottom:0;left:0;width:100%;height:220px;background:linear-gradient(to bottom,transparent,var(--bg-1));z-index:2;}
     .hero-content{position:relative;z-index:3;text-align:center;padding:0 24px;}
@@ -100,7 +123,7 @@
     .svc-card:hover .svc-arrow{background:var(--gold);color:#fff;transform:translateX(3px);}
     #parallax-band{position:relative;height:65vh;overflow:hidden;}
     .par-video-wrap{position:absolute;inset:-25%;will-change:transform;}
-    #parallaxVideo{width:100%;height:100%;object-fit:cover;}
+    #parallaxVideo{width:100%;height:100%;object-fit:cover;background:linear-gradient(135deg,#0a0804 0%,#1a1008 20%,#2a1a0a 40%,#1a1208 60%,#0f0c06 80%,#080604 100%);}
     .par-overlay{position:absolute;inset:0;background:linear-gradient(110deg,rgba(255,252,245,0.88) 0%,rgba(255,248,235,0.65) 45%,rgba(255,248,235,0.80) 100%);z-index:1;display:flex;align-items:center;padding:0 10%;}
     .par-content{z-index:2;max-width:680px;opacity:0;transform:translateX(-32px);transition:all 0.9s cubic-bezier(0.25,0.46,0.45,0.94);}
     .par-content.visible{opacity:1;transform:translateX(0);}
@@ -139,7 +162,7 @@
     .testi-wrap{max-width:820px;margin:0 auto;text-align:center;}
     .testi-card{background:var(--bg-0);border:1.5px solid var(--border-soft);border-radius:28px;padding:64px 72px;box-shadow:var(--shadow-md);position:relative;opacity:0;transform:translateY(28px);transition:all 0.8s;}
     .testi-card.visible{opacity:1;transform:translateY(0);}
-    .testi-card::before{content:'“';font-family:'Cinzel',serif;font-size:100px;color:var(--gold);opacity:0.12;position:absolute;top:12px;left:40px;line-height:1;}
+    .testi-card::before{content:'"';font-family:'Cinzel',serif;font-size:100px;color:var(--gold);opacity:0.12;position:absolute;top:12px;left:40px;line-height:1;}
     .testi-stars{font-size:18px;letter-spacing:3px;margin-bottom:28px;}
     .testi-text{font-family:'Cinzel',serif;font-size:clamp(16px,2.2vw,24px);font-weight:400;line-height:1.65;color:var(--text-primary);font-style:italic;}
     .testi-author{margin-top:36px;display:flex;align-items:center;justify-content:center;gap:16px;}
@@ -150,7 +173,7 @@
     .contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start;}
     .contact-info-wrap{opacity:0;transform:translateX(-28px);transition:all 0.8s;}
     .contact-info-wrap.visible{opacity:1;transform:translateX(0);}
-    .contact-card{display:flex;gap:18px;align-items:flex-start;padding:24px;background:var(--bg-0);border:1.5px solid var(--border-soft);border-radius:16px;margin-top:16px;box-shadow:var(--shadow-sm);opacity:0;transform:translateX(-20px);transition:opacity 0.55s,transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94),border-color 0.25s,box-shadow 0.25s;}
+    .contact-card{display:flex;gap:18px;align-items:flex-start;padding:24px;background:var(--bg-0);border:1.5px solid var(--border-soft);border-radius:16px;margin-top:16px;box-shadow:var(--shadow-sm);transition:border-color 0.25s,box-shadow 0.25s,transform 0.25s;opacity:0;transform:translateX(-20px);transition:opacity 0.55s,transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94),border-color 0.25s,box-shadow 0.25s;}
     .contact-card.card-visible{opacity:1;transform:translateX(0);}
     .contact-card:hover{border-color:var(--border);box-shadow:var(--shadow-md);transform:translateY(-2px)!important;}
     .contact-icon{width:44px;height:44px;background:var(--gold-pale);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
@@ -182,7 +205,7 @@
     .footer-watermark-text{font-size:12px;font-weight:500;letter-spacing:0.5px;color:var(--text-muted);}
     .footer-watermark-text a{display:inline-flex;align-items:center;gap:4px;text-decoration:none;position:relative;z-index:10;cursor:pointer;}
     .footer-watermark-text a span.brand{font-weight:800;font-size:13px;background:linear-gradient(135deg,#c850c0,#ff6b6b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-    .footer-watermark-text a::after{content:'↗';font-size:11px;color:#c850c0;opacity:0;transform:translate(-3px,3px);transition:opacity 0.2s,transform 0.2s;-webkit-text-fill-color:#c850c0;}
+    .footer-watermark-text a::after{content:'arrow';font-size:11px;color:#c850c0;opacity:0;transform:translate(-3px,3px);transition:opacity 0.2s,transform 0.2s;-webkit-text-fill-color:#c850c0;}
     .footer-watermark-text a:hover::after{opacity:1;transform:translate(0,0);}
     @keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
   </style>
@@ -191,240 +214,571 @@
   <div id="root"></div>
   <script type="text/babel">
     const { useState, useEffect, useRef, useCallback, memo } = React;
+
     function useInView(threshold = 0.12) {
-      const ref = useRef(null); const [inView, setInView] = useState(false);
-      useEffect(() => { const el = ref.current; if (!el) return;
-        const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setInView(true); obs.unobserve(el); } }, { threshold });
-        obs.observe(el); return () => obs.disconnect(); }, [threshold]);
-      return [ref, inView]; }
+      const ref = useRef(null);
+      const [inView, setInView] = useState(false);
+      useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        const obs = new IntersectionObserver(([e]) => {
+          if (e.isIntersecting) { setInView(true); obs.unobserve(el); }
+        }, { threshold });
+        obs.observe(el);
+        return () => obs.disconnect();
+      }, [threshold]);
+      return [ref, inView];
+    }
+
     function useCountUp(target, suffix, duration, active) {
-      const [value, setValue] = useState('0' + suffix); const [counting, setCounting] = useState(false); const rafRef = useRef(null);
-      useEffect(() => { if (!active) return; setCounting(true); const start = performance.now();
-        const tick = (now) => { const p = Math.min((now - start) / duration, 1); const eased = p === 1 ? 1 : 1 - Math.pow(2, -10 * p);
+      const [value, setValue] = useState('0' + suffix);
+      const [counting, setCounting] = useState(false);
+      const rafRef = useRef(null);
+      useEffect(() => {
+        if (!active) return;
+        setCounting(true);
+        const start = performance.now();
+        const tick = (now) => {
+          const p = Math.min((now - start) / duration, 1);
+          const eased = p === 1 ? 1 : 1 - Math.pow(2, -10 * p);
           setValue(Math.round(eased * target) + suffix);
-          if (p < 1) { rafRef.current = requestAnimationFrame(tick); } else { setValue(target + suffix); setCounting(false); } };
+          if (p < 1) { rafRef.current = requestAnimationFrame(tick); }
+          else { setValue(target + suffix); setCounting(false); }
+        };
         rafRef.current = requestAnimationFrame(tick);
-        return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); }; }, [active]);
-      return { value, counting }; }
+        return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+      }, [active]);
+      return { value, counting };
+    }
+
     function useTypewriter(text, speed, active) {
-      const [displayed, setDisplayed] = useState(''); const [done, setDone] = useState(false);
-      useEffect(() => { if (!active) return; let i = 0; setDisplayed(''); setDone(false);
-        const iv = setInterval(() => { if (i < text.length) { i++; setDisplayed(text.slice(0, i)); } else { clearInterval(iv); setDone(true); } }, speed);
-        return () => clearInterval(iv); }, [active, text, speed]);
-      return { displayed, done }; }
+      const [displayed, setDisplayed] = useState('');
+      const [done, setDone] = useState(false);
+      useEffect(() => {
+        if (!active) return;
+        let i = 0; setDisplayed(''); setDone(false);
+        const iv = setInterval(() => {
+          if (i < text.length) { i++; setDisplayed(text.slice(0, i)); }
+          else { clearInterval(iv); setDone(true); }
+        }, speed);
+        return () => clearInterval(iv);
+      }, [active, text, speed]);
+      return { displayed, done };
+    }
+
     const CharSplit = ({ text, baseDelay = 0 }) =>
-      [...text].map((ch, i) => ch === ' '
-        ? <span key={i} className="char space" style={{ transitionDelay: `${(baseDelay + i) * 38}ms` }}>&nbsp;</span>
-        : <span key={i} className="char" style={{ transitionDelay: `${(baseDelay + i) * 38}ms` }}>{ch}</span>);
+      [...text].map((ch, i) =>
+        ch === ' '
+          ? <span key={i} className="char space" style={{ transitionDelay: ((baseDelay + i) * 38) + 'ms' }}>&nbsp;</span>
+          : <span key={i} className="char" style={{ transitionDelay: ((baseDelay + i) * 38) + 'ms' }}>{ch}</span>
+      );
+
     const SectionTitle = ({ lines, inView, style = {}, as: Tag = 'h2' }) => {
       let count = 0;
-      return (<Tag className={`sec-title has-split-chars${inView ? ' chars-visible' : ''}`} style={style}>
-        {lines.map((line, li) => { const offset = count; count += line.length;
-          return (<React.Fragment key={li}><CharSplit text={line} baseDelay={offset} />{li < lines.length - 1 && <br />}</React.Fragment>); })}
-      </Tag>); };
+      return (
+        <Tag className={'sec-title has-split-chars' + (inView ? ' chars-visible' : '')} style={style}>
+          {lines.map((line, li) => {
+            const offset = count; count += line.length;
+            return (
+              <React.Fragment key={li}>
+                <CharSplit text={line} baseDelay={offset} />
+                {li < lines.length - 1 && <br />}
+              </React.Fragment>
+            );
+          })}
+        </Tag>
+      );
+    };
+
     const WordSplit = ({ text, inView, Tag = 'p', className = '', style = {} }) => (
-      <Tag className={`${className} has-split-words${inView ? ' words-visible' : ''}`} style={style}>
-        {text.split(' ').map((w, i) => (<span key={i} className="word"><span className="inn" style={{ transitionDelay: `${i * 55}ms` }}>{w}</span></span>))}
-      </Tag>);
+      <Tag className={className + ' has-split-words' + (inView ? ' words-visible' : '')} style={style}>
+        {text.split(' ').map((w, i) => (
+          <span key={i} className="word">
+            <span className="inn" style={{ transitionDelay: (i * 55) + 'ms' }}>{w}</span>
+          </span>
+        ))}
+      </Tag>
+    );
+
     const Eyebrow = ({ text, inView, style = {} }) => (
-      <div className={`eyebrow${inView ? ' visible' : ''}`} style={style}><span></span><p>{text}</p></div>);
+      <div className={'eyebrow' + (inView ? ' visible' : '')} style={style}>
+        <span></span><p>{text}</p>
+      </div>
+    );
+
     const Loader = memo(({ show }) => (
       <div id="loader" className={show ? '' : 'hidden'}>
         <div className="loader-logo">Archi <span>Build</span></div>
         <div className="loader-track"><div className="loader-fill" /></div>
-      </div>));
+      </div>
+    ));
+
     const Cursor = memo(() => {
-      const dotRef = useRef(null); const ringRef = useRef(null); const pos = useRef({ mx:0, my:0, rx:0, ry:0 });
+      const dotRef  = useRef(null);
+      const ringRef = useRef(null);
+      const pos     = useRef({ mx:0, my:0, rx:0, ry:0 });
       useEffect(() => {
-        const onMove = (e) => { pos.current.mx = e.clientX; pos.current.my = e.clientY;
-          if (dotRef.current) { dotRef.current.style.left = e.clientX - 3.5 + 'px'; dotRef.current.style.top = e.clientY - 3.5 + 'px'; } };
-        const onOver = (e) => { if (e.target.closest('a,button,.svc-card,.proj-card') && ringRef.current) { ringRef.current.style.transform = 'scale(1.9)'; ringRef.current.style.opacity = '0.35'; } };
-        const onOut = (e) => { if (e.target.closest('a,button,.svc-card,.proj-card') && ringRef.current) { ringRef.current.style.transform = 'scale(1)'; ringRef.current.style.opacity = '0.55'; } };
-        document.addEventListener('mousemove', onMove); document.addEventListener('mouseover', onOver); document.addEventListener('mouseout', onOut);
-        let raf; const loop = () => { const p = pos.current; p.rx += (p.mx - p.rx) * 0.11; p.ry += (p.my - p.ry) * 0.11;
-          if (ringRef.current) { ringRef.current.style.left = p.rx - 17 + 'px'; ringRef.current.style.top = p.ry - 17 + 'px'; }
-          raf = requestAnimationFrame(loop); };
+        const onMove = (e) => {
+          pos.current.mx = e.clientX; pos.current.my = e.clientY;
+          if (dotRef.current) {
+            dotRef.current.style.left = e.clientX - 3.5 + 'px';
+            dotRef.current.style.top  = e.clientY - 3.5 + 'px';
+          }
+        };
+        const onOver = (e) => {
+          if (e.target.closest('a,button,.svc-card,.proj-card') && ringRef.current) {
+            ringRef.current.style.transform = 'scale(1.9)';
+            ringRef.current.style.opacity   = '0.35';
+          }
+        };
+        const onOut = (e) => {
+          if (e.target.closest('a,button,.svc-card,.proj-card') && ringRef.current) {
+            ringRef.current.style.transform = 'scale(1)';
+            ringRef.current.style.opacity   = '0.55';
+          }
+        };
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseover',  onOver);
+        document.addEventListener('mouseout',   onOut);
+        let raf;
+        const loop = () => {
+          const p = pos.current;
+          p.rx += (p.mx - p.rx) * 0.11;
+          p.ry += (p.my - p.ry) * 0.11;
+          if (ringRef.current) {
+            ringRef.current.style.left = p.rx - 17 + 'px';
+            ringRef.current.style.top  = p.ry - 17 + 'px';
+          }
+          raf = requestAnimationFrame(loop);
+        };
         raf = requestAnimationFrame(loop);
-        return () => { document.removeEventListener('mousemove', onMove); document.removeEventListener('mouseover', onOver); document.removeEventListener('mouseout', onOut); cancelAnimationFrame(raf); }; }, []);
-      return (<><div className="cursor-dot" ref={dotRef} /><div className="cursor-ring" ref={ringRef} /></>); });
+        return () => {
+          document.removeEventListener('mousemove', onMove);
+          document.removeEventListener('mouseover',  onOver);
+          document.removeEventListener('mouseout',   onOut);
+          cancelAnimationFrame(raf);
+        };
+      }, []);
+      return (
+        <>
+          <div className="cursor-dot"  ref={dotRef}  />
+          <div className="cursor-ring" ref={ringRef} />
+        </>
+      );
+    });
+
     const Navbar = memo(({ scrolled }) => (
       <nav className={scrolled ? 'scrolled' : ''}>
         <a href="#" className="nav-logo">Archi <span>Build</span></a>
         <ul className="nav-links">
-          {['Services','Process','Projects','Contact'].map(s => (<li key={s}><a href={`#${s.toLowerCase()}`}>{s}</a></li>))}
+          {['Services','Process','Projects','Contact'].map(s => (
+            <li key={s}><a href={'#' + s.toLowerCase()}>{s}</a></li>
+          ))}
         </ul>
         <a href="#contact" className="nav-cta">Get a Quote</a>
-      </nav>));
+      </nav>
+    ));
+
     const Hero = memo(({ loaderDone }) => {
-      const videoRef = useRef(null); const wrapRef = useRef(null); const sectionRef = useRef(null);
+      const videoRef   = useRef(null);
+      const wrapRef    = useRef(null);
+      const sectionRef = useRef(null);
       useEffect(() => {
-        const handle = () => { const sy = window.scrollY; const hh = sectionRef.current?.offsetHeight || 0;
-          if (sy < hh && wrapRef.current) wrapRef.current.style.transform = `translateY(${(sy/hh)*22}%)`; };
+        const handle = () => {
+          const sy = window.scrollY;
+          const hh = sectionRef.current?.offsetHeight || 0;
+          if (sy < hh && wrapRef.current)
+            wrapRef.current.style.transform = 'translateY(' + ((sy/hh)*22) + '%)';
+        };
         window.addEventListener('scroll', handle, { passive: true });
-        return () => window.removeEventListener('scroll', handle); }, []);
+        return () => window.removeEventListener('scroll', handle);
+      }, []);
       const SUB = 'Architecture · Construction · Interior Design · Since 2005';
       const { displayed, done } = useTypewriter(SUB, 32, loaderDone);
+      const titleInView = loaderDone;
       return (
         <section id="hero" ref={sectionRef}>
           <div className="hero-video-wrap" ref={wrapRef}>
-            <video id="bgVideo" autoPlay muted loop playsInline>
-              <source src="./kling_20260318_作品_High_quali_4507_0.mp4" type="video/mp4" />
-            </video>
+            <div id="bgVideo" />
           </div>
-          <div className="hero-overlay" /><div className="hero-fade-bottom" />
+          <div className="hero-overlay" />
+          <div className="hero-fade-bottom" />
           <div className="hero-content">
-            <div className="hero-eyebrow"><span /><p>Premier House Building Agency</p></div>
-            <h1 className={`hero-title has-split-chars${loaderDone ? ' chars-visible' : ''}`}>
-              <CharSplit text="Build Your" baseDelay={0} /><em><CharSplit text="Dream Home" baseDelay={10} /></em>
+            <div className="hero-eyebrow">
+              <span /><p>Premier House Building Agency</p>
+            </div>
+            <h1 className={'hero-title has-split-chars' + (titleInView ? ' chars-visible' : '')}>
+              <CharSplit text="Build Your" baseDelay={0} />
+              <em><CharSplit text="Dream Home" baseDelay={10} /></em>
             </h1>
-            <p className="hero-sub">{displayed}{!done && <span className="tw-cursor" />}</p>
+            <p className="hero-sub">
+              {displayed}
+              {!done && <span className="tw-cursor" />}
+            </p>
             <div className="hero-actions">
-              <a href="#projects" className="btn-gold">View Our Work ↗</a>
-              <a href="#contact" className="btn-glass">Free Consultation</a>
+              <a href="#projects" className="btn-gold">View Our Work</a>
+              <a href="#contact"  className="btn-glass">Free Consultation</a>
             </div>
           </div>
-          <div className="scroll-cue"><p>Scroll</p><div className="scroll-cue-line" /></div>
-        </section>); });
+          <div className="scroll-cue">
+            <p>Scroll</p>
+            <div className="scroll-cue-line" />
+          </div>
+        </section>
+      );
+    });
+
     const StatItem = memo(({ target, suffix, label, delay = 0 }) => {
-      const [ref, inView] = useInView(0.15); const { value, counting } = useCountUp(target, suffix, 1900, inView);
-      return (<div className={`stat-item${inView ? ' visible' : ''}`} ref={ref} style={{ transitionDelay: `${delay}ms` }}>
-        <div className={`stat-num${counting ? ' counting' : ''}`}>{value}</div><div className="stat-lbl">{label}</div></div>); });
-    const Stats = memo(() => (<div id="stats"><div className="stats-glass">
-      <StatItem target={500} suffix="+" label="Homes Built" delay={0} /><div className="stat-sep" />
-      <StatItem target={20} suffix="+" label="Years Experience" delay={100} /><div className="stat-sep" />
-      <StatItem target={98} suffix="%" label="Client Satisfaction" delay={200} /><div className="stat-sep" />
-      <StatItem target={15} suffix="" label="Design Awards" delay={300} /></div></div>));
+      const [ref, inView] = useInView(0.15);
+      const { value, counting } = useCountUp(target, suffix, 1900, inView);
+      return (
+        <div className={'stat-item' + (inView ? ' visible' : '')} ref={ref} style={{ transitionDelay: delay + 'ms' }}>
+          <div className={'stat-num' + (counting ? ' counting' : '')}>{value}</div>
+          <div className="stat-lbl">{label}</div>
+        </div>
+      );
+    });
+
+    const Stats = memo(() => (
+      <div id="stats">
+        <div className="stats-glass">
+          <StatItem target={500} suffix="+" label="Homes Built"         delay={0}   />
+          <div className="stat-sep" />
+          <StatItem target={20}  suffix="+" label="Years Experience"    delay={100} />
+          <div className="stat-sep" />
+          <StatItem target={98}  suffix="%" label="Client Satisfaction" delay={200} />
+          <div className="stat-sep" />
+          <StatItem target={15}  suffix=""  label="Design Awards"       delay={300} />
+        </div>
+      </div>
+    ));
+
     const SVC_DATA = [
-      { num:'01', icon:'🏗️', title:'Architecture Design', desc:'Custom architectural blueprints crafted by award-winning designers blending aesthetics with structural excellence.' },
-      { num:'02', icon:'🏭️', title:'Construction', desc:'End-to-end construction management using premium materials and certified engineers ensuring durability and precision.' },
-      { num:'03', icon:'🛋️', title:'Interior Design', desc:'Transforming spaces into personalized sanctuaries with curated furniture, lighting, and material palettes.' },
-      { num:'04', icon:'🌿', title:'Landscape Design', desc:'Outdoor spaces designed to harmonize with nature — from private gardens to resort-style poolscapes.' },
-      { num:'05', icon:'⚡', title:'Smart Home Tech', desc:'Integrated smart systems for lighting, security, climate, and entertainment — all at your fingertips.' },
-      { num:'06', icon:'🔑', title:'Turnkey Projects', desc:'Complete turnkey solutions — we handle everything from permits to handover, completely stress-free.' }];
+      { num:'01', icon:'🏛️', title:'Architecture Design', desc:'Custom architectural blueprints crafted by award-winning designers blending aesthetics with structural excellence.' },
+      { num:'02', icon:'🏗️', title:'Construction',        desc:'End-to-end construction management using premium materials and certified engineers ensuring durability and precision.' },
+      { num:'03', icon:'🛋️', title:'Interior Design',     desc:'Transforming spaces into personalized sanctuaries with curated furniture, lighting, and material palettes.' },
+      { num:'04', icon:'🌿', title:'Landscape Design',    desc:'Outdoor spaces designed to harmonize with nature — from private gardens to resort-style poolscapes.' },
+      { num:'05', icon:'⚡', title:'Smart Home Tech',     desc:'Integrated smart systems for lighting, security, climate, and entertainment — all at your fingertips.' },
+      { num:'06', icon:'🔑', title:'Turnkey Projects',    desc:'Complete turnkey solutions — we handle everything from permits to handover, completely stress-free.' },
+    ];
+
     const ServiceCard = memo(({ data, delay }) => {
       const [ref, inView] = useInView(0.15);
-      return (<div className={`svc-card${inView ? ' visible' : ''}`} ref={ref} style={{ transitionDelay: `${delay}ms` }}>
-        <div className="svc-num">{data.num}</div><span className="svc-icon">{data.icon}</span>
-        <div className="svc-title">{data.title}</div>
-        <WordSplit text={data.desc} inView={inView} Tag="p" className="svc-desc" />
-        <div className="svc-arrow">→</div></div>); });
+      return (
+        <div className={'svc-card' + (inView ? ' visible' : '')} ref={ref} style={{ transitionDelay: delay + 'ms' }}>
+          <div className="svc-num">{data.num}</div>
+          <span className="svc-icon">{data.icon}</span>
+          <div className="svc-title">{data.title}</div>
+          <WordSplit text={data.desc} inView={inView} Tag="p" className="svc-desc" />
+          <div className="svc-arrow">→</div>
+        </div>
+      );
+    });
+
     const Services = memo(() => {
       const [hdRef, hdInView] = useInView();
-      return (<section id="services"><div className="services-hd" ref={hdRef}>
-        <div><Eyebrow text="What We Offer" inView={hdInView} /><SectionTitle lines={['Our','Services']} inView={hdInView} /></div>
-        <WordSplit text="From groundbreaking concepts to the final finishing touch, we deliver complete home building solutions tailored to your lifestyle and vision." inView={hdInView} Tag="p" className="sec-body" />
-      </div><div className="services-grid">{SVC_DATA.map((d, i) => <ServiceCard key={d.num} data={d} delay={(i % 3) * 100} />)}</div></section>); });
+      return (
+        <section id="services">
+          <div className="services-hd" ref={hdRef}>
+            <div>
+              <Eyebrow text="What We Offer" inView={hdInView} />
+              <SectionTitle lines={['Our','Services']} inView={hdInView} />
+            </div>
+            <WordSplit
+              text="From groundbreaking concepts to the final finishing touch, we deliver complete home building solutions tailored to your lifestyle and vision."
+              inView={hdInView} Tag="p" className="sec-body"
+            />
+          </div>
+          <div className="services-grid">
+            {SVC_DATA.map((d, i) => (
+              <ServiceCard key={d.num} data={d} delay={(i % 3) * 100} />
+            ))}
+          </div>
+        </section>
+      );
+    });
+
     const ParallaxBand = memo(() => {
-      const bandRef = useRef(null); const wrapRef = useRef(null); const [contRef, contInView] = useInView(0.2);
+      const bandRef  = useRef(null);
+      const wrapRef  = useRef(null);
+      const [contRef, contInView] = useInView(0.2);
       useEffect(() => {
-        const handle = () => { if (!bandRef.current || !wrapRef.current) return;
-          const rect = bandRef.current.getBoundingClientRect();
+        const handle = () => {
+          if (!bandRef.current || !wrapRef.current) return;
+          const rect   = bandRef.current.getBoundingClientRect();
           const offset = (rect.top + rect.height/2 - window.innerHeight/2) / window.innerHeight;
-          wrapRef.current.style.transform = `translateY(${offset * 28}%)`; };
-        window.addEventListener('scroll', handle, { passive: true }); return () => window.removeEventListener('scroll', handle); }, []);
-      return (<div id="parallax-band" ref={bandRef}>
-        <div className="par-video-wrap" ref={wrapRef}>
-          <video id="parallaxVideo" autoPlay muted loop playsInline>
-            <source src="./kling_20260318_作品_High_quali_4507_0.mp4" type="video/mp4" /></video></div>
-        <div className="par-overlay">
-          <div className={`par-content${contInView ? ' visible' : ''}`} ref={contRef}>
-            <div className="par-pill"><span /><p>Our Philosophy</p></div>
-            <div className="par-quote">
-              {[{text:"We Don't Just",em:false},{text:"Build Houses.",em:false},{text:"We Build Lives.",em:true}].map((line, i) => (
-                <span key={i} className={`clip-line${contInView ? ' line-visible' : ''}`}>
-                  <span className="clip-inner" style={{ transitionDelay: `${i * 150}ms` }}>{line.em ? <em>{line.text}</em> : line.text}</span></span>))}
-            </div></div></div></div>); });
+          wrapRef.current.style.transform = 'translateY(' + (offset * 28) + '%)';
+        };
+        window.addEventListener('scroll', handle, { passive: true });
+        return () => window.removeEventListener('scroll', handle);
+      }, []);
+      const LINES = [
+        { text: "We Don't Just", em: false },
+        { text: "Build Houses.",  em: false },
+        { text: "We Build Lives.", em: true  },
+      ];
+      return (
+        <div id="parallax-band" ref={bandRef}>
+          <div className="par-video-wrap" ref={wrapRef}>
+            <div id="parallaxVideo" />
+          </div>
+          <div className="par-overlay">
+            <div className={'par-content' + (contInView ? ' visible' : '')} ref={contRef}>
+              <div className="par-pill"><span /><p>Our Philosophy</p></div>
+              <div className="par-quote">
+                {LINES.map((line, i) => (
+                  <span key={i} className={'clip-line' + (contInView ? ' line-visible' : '')}>
+                    <span className="clip-inner" style={{ transitionDelay: (i * 150) + 'ms' }}>
+                      {line.em ? <em>{line.text}</em> : line.text}
+                    </span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    });
+
     const STEPS = [
       { icon:'💬', label:'Step 01', title:'Consultation', desc:'We begin with a deep conversation about your vision, budget, timeline, and lifestyle needs.' },
-      { icon:'📐', label:'Step 02', title:'Design', desc:'Our architects create stunning 3D visualizations and detailed blueprints for your approval.' },
-      { icon:'🔨', label:'Step 03', title:'Build', desc:'Skilled craftsmen bring your home to life using the highest quality materials and methods.' },
-      { icon:'🏠', label:'Step 04', title:'Handover', desc:'We hand you the keys to your dream home, with full warranty and post-completion support.' }];
+      { icon:'📐', label:'Step 02', title:'Design',       desc:'Our architects create stunning 3D visualizations and detailed blueprints for your approval.' },
+      { icon:'🔨', label:'Step 03', title:'Build',        desc:'Skilled craftsmen bring your home to life using the highest quality materials and methods.' },
+      { icon:'🏠', label:'Step 04', title:'Handover',     desc:'We hand you the keys to your dream home, with full warranty and post-completion support.' },
+    ];
+
     const ProcStep = memo(({ step, delay }) => {
       const [ref, inView] = useInView(0.15);
-      return (<div className={`proc-step${inView ? ' visible' : ''}`} ref={ref} style={{ transitionDelay: `${delay}ms` }}>
-        <div className="proc-bubble">{step.icon}</div><div className="proc-label">{step.label}</div>
-        <div className="proc-title">{step.title}</div><WordSplit text={step.desc} inView={inView} Tag="p" className="proc-desc" /></div>); });
+      return (
+        <div className={'proc-step' + (inView ? ' visible' : '')} ref={ref} style={{ transitionDelay: delay + 'ms' }}>
+          <div className="proc-bubble">{step.icon}</div>
+          <div className="proc-label">{step.label}</div>
+          <div className="proc-title">{step.title}</div>
+          <WordSplit text={step.desc} inView={inView} Tag="p" className="proc-desc" />
+        </div>
+      );
+    });
+
     const Process = memo(() => {
       const [hdRef, hdInView] = useInView();
-      return (<section id="process"><div className="process-hd" ref={hdRef}>
-        <Eyebrow text="How We Work" inView={hdInView} style={{ justifyContent:'center' }} />
-        <SectionTitle lines={['Our Process']} inView={hdInView} style={{ textAlign:'center' }} /></div>
-        <div className="process-track">{STEPS.map((s, i) => <ProcStep key={s.label} step={s} delay={i * 150} />)}</div></section>); });
+      return (
+        <section id="process">
+          <div className="process-hd" ref={hdRef}>
+            <Eyebrow text="How We Work" inView={hdInView} style={{ justifyContent:'center' }} />
+            <SectionTitle lines={['Our Process']} inView={hdInView} style={{ textAlign:'center' }} />
+          </div>
+          <div className="process-track">
+            {STEPS.map((s, i) => <ProcStep key={s.label} step={s} delay={i * 150} />)}
+          </div>
+        </section>
+      );
+    });
+
     const PROJECTS = [
-      { img:'./Whisk_67626fa8cb7ba5e966b4df772a3b3a7cdr.jpeg', type:'Luxury Villa · Chennai', name:'The Summit Estate' },
-      { img:'./Whisk_8003f8905defcbe84d54a84723fef0c2dr (1).jpeg', type:'Modern Home · Bangalore', name:'Coastal Haven' },
-      { img:'./Whisk_67626fa8cb7ba5e966b4df772a3b3a7cdr (1).jpeg', type:'Twilight Villa · Pune', name:'Amber Ridge' },
-      { img:'./Whisk_12ddb5ae0eaea87b435419ea51f97644dr.jpeg', type:'Contemporary · Coimbatore', name:'Woodland Retreat' },
-      { img:'./Whisk_bc1319d9405268c9ab84cbb96d8c7827dr (1).jpeg', type:'Desert Modern · Jaipur', name:'Sunset Pavilion' }];
+      { img:'https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?auto=format&fit=crop&w=800&q=80',  type:'Luxury Villa · Chennai',    name:'The Summit Estate' },
+      { img:'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80', type:'Modern Home · Bangalore',   name:'Coastal Haven'     },
+      { img:'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80', type:'Twilight Villa · Pune',      name:'Amber Ridge'       },
+      { img:'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80', type:'Contemporary · Coimbatore', name:'Woodland Retreat'  },
+      { img:'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80', type:'Desert Modern · Jaipur',    name:'Sunset Pavilion'   },
+    ];
+
     const ProjCard = memo(({ project, delay }) => {
       const [ref, inView] = useInView(0.1);
-      return (<div className={`proj-card${inView ? ' visible' : ''}`} ref={ref} style={{ transitionDelay: `${delay}ms` }}>
-        <div className="proj-bg" style={{ backgroundImage: `url('${project.img}')` }} />
-        <div className="proj-overlay-gradient" />
-        <div className="proj-chip"><div className="proj-chip-type">{project.type}</div><div className="proj-chip-name">{project.name}</div></div></div>); });
+      return (
+        <div className={'proj-card' + (inView ? ' visible' : '')} ref={ref} style={{ transitionDelay: delay + 'ms' }}>
+          <div className="proj-bg" style={{ backgroundImage: "url('" + project.img + "')" }} />
+          <div className="proj-overlay-gradient" />
+          <div className="proj-chip">
+            <div className="proj-chip-type">{project.type}</div>
+            <div className="proj-chip-name">{project.name}</div>
+          </div>
+        </div>
+      );
+    });
+
     const Projects = memo(() => {
       const [hdRef, hdInView] = useInView();
-      return (<section id="projects"><div className="projects-hd" ref={hdRef}>
-        <div><Eyebrow text="Our Portfolio" inView={hdInView} /><SectionTitle lines={['Featured','Projects']} inView={hdInView} /></div>
-        <a href="#contact" className="btn-glass" style={{ flexShrink:0 }}>View All ↗</a></div>
-        <div className="projects-grid">{PROJECTS.map((p, i) => <ProjCard key={p.name} project={p} delay={i * 80} />)}</div></section>); });
-    const Testimonial = memo(() => {
-      const [ref, inView] = useInView(0.15); const [eyeRef, eyeInView] = useInView();
-      return (<section id="testimonial"><div className="testi-wrap">
-        <Eyebrow text="What Clients Say" inView={eyeInView} style={{ justifyContent:'center' }} ref={eyeRef} />
-        <div className={`testi-card${inView ? ' visible' : ''}`} ref={ref}>
-          <div className="testi-stars">⭐⭐⭐⭐⭐</div>
-          <WordSplit text="Archi Build transformed our dream into a reality beyond our wildest imagination. Every single detail was handled with the precision of master craftsmen and the care of family." inView={inView} Tag="p" className="testi-text" />
-          <div className="testi-author"><div className="testi-avatar">👤</div>
-            <div><div className="testi-name">Rajesh &amp; Priya Kumar</div><div className="testi-role">The Summit Estate, Chennai · 2024</div></div></div></div></div></section>); });
-    const Contact = memo(() => {
-      const [infoRef, infoInView] = useInView(0.1); const [formRef, formInView] = useInView(0.1);
-      const [card1Ref, card1InView] = useInView(0.1); const [card2Ref, card2InView] = useInView(0.1); const [card3Ref, card3InView] = useInView(0.1);
-      const [hdRef, hdInView] = useInView();
-      const [form, setForm] = useState({ fn:'',ln:'',email:'',phone:'',type:'',msg:'' }); const [sent, setSent] = useState(false);
-      const onChange = useCallback(e => setForm(prev => ({ ...prev, [e.target.name]: e.target.value })), []);
-      const onSubmit = useCallback(e => { e.preventDefault(); setSent(true); setTimeout(() => setSent(false), 3200); }, []);
-      return (<section id="contact"><div className="contact-grid">
-        <div className={`contact-info-wrap${infoInView ? ' visible' : ''}`} ref={infoRef}>
-          <Eyebrow text="Get In Touch" inView={hdInView} ref={hdRef} />
-          <SectionTitle lines={["Let's Build",'Together']} inView={infoInView} />
-          <WordSplit text="Ready to build your dream home? Our team is here to guide you every step of the way — from first conversation to final handover." inView={infoInView} Tag="p" className="sec-body" style={{ marginTop:20 }} />
-          {[{ ref:card1Ref, inView:card1InView, delay:0, icon:'📍', lbl:'Visit Us', val:<>42 Architects Avenue, Anna Nagar<br/>Chennai — 600 040</> },
-            { ref:card2Ref, inView:card2InView, delay:120, icon:'📞', lbl:'Call Us', val:'+91 98765 43210' },
-            { ref:card3Ref, inView:card3InView, delay:240, icon:'✉️', lbl:'Email Us', val:'hello@archibuild.in' }
-          ].map((c, i) => (
-            <div key={i} className={`contact-card${c.inView ? ' card-visible' : ''}`} ref={c.ref} style={{ transitionDelay:`${c.delay}ms` }}>
-              <div className="contact-icon">{c.icon}</div><div><div className="contact-lbl">{c.lbl}</div><div className="contact-val">{c.val}</div></div></div>))}
-        </div>
-        <div className={`contact-form-wrap${formInView ? ' visible' : ''}`} ref={formRef}><div className="form-card">
-          <Eyebrow text="Send Enquiry" inView={formInView} style={{ marginBottom:24 }} />
-          <form onSubmit={onSubmit}>
-            <div className="form-row">
-              <div className="form-group"><label htmlFor="fn">First Name</label><input id="fn" name="fn" type="text" placeholder="Rajesh" value={form.fn} onChange={onChange} /></div>
-              <div className="form-group"><label htmlFor="ln">Last Name</label><input id="ln" name="ln" type="text" placeholder="Kumar" value={form.ln} onChange={onChange} /></div>
+      return (
+        <section id="projects">
+          <div className="projects-hd" ref={hdRef}>
+            <div>
+              <Eyebrow text="Our Portfolio" inView={hdInView} />
+              <SectionTitle lines={['Featured','Projects']} inView={hdInView} />
             </div>
-            <div className="form-group"><label htmlFor="email">Email Address</label><input id="email" name="email" type="email" placeholder="hello@email.com" value={form.email} onChange={onChange} /></div>
-            <div className="form-group"><label htmlFor="phone">Phone Number</label><input id="phone" name="phone" type="tel" placeholder="+91 98765 43210" value={form.phone} onChange={onChange} /></div>
-            <div className="form-group"><label htmlFor="type">Project Type</label><input id="type" name="type" type="text" placeholder="Villa / Bungalow / Apartment..." value={form.type} onChange={onChange} /></div>
-            <div className="form-group"><label htmlFor="msg">Your Message</label><textarea id="msg" name="msg" placeholder="Tell us about your dream home..." value={form.msg} onChange={onChange} /></div>
-            <button type="submit" className={`submit-btn${sent ? ' sent' : ''}`}>{sent ? '✓ Message Sent!' : <>Send Enquiry <span>→</span></>}</button>
-          </form></div></div></div></section>); });
-    const Footer = memo(() => (<footer>
-      <div className="footer-logo">Archi <span>Build</span></div>
-      <div className="footer-links">{['Instagram','LinkedIn','Houzz'].map(s => <a key={s} href="#">{s}</a>)}</div></footer>));
+            <a href="#contact" className="btn-glass" style={{ flexShrink:0 }}>View All</a>
+          </div>
+          <div className="projects-grid">
+            {PROJECTS.map((p, i) => <ProjCard key={p.name} project={p} delay={i * 80} />)}
+          </div>
+        </section>
+      );
+    });
+
+    const Testimonial = memo(() => {
+      const [ref, inView] = useInView(0.15);
+      const [eyeRef, eyeInView] = useInView();
+      return (
+        <section id="testimonial">
+          <div className="testi-wrap">
+            <Eyebrow text="What Clients Say" inView={eyeInView} style={{ justifyContent:'center' }} ref={eyeRef} />
+            <div className={'testi-card' + (inView ? ' visible' : '')} ref={ref}>
+              <div className="testi-stars">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
+              <WordSplit
+                text="Archi Build transformed our dream into a reality beyond our wildest imagination. Every single detail was handled with the precision of master craftsmen and the care of family."
+                inView={inView} Tag="p" className="testi-text"
+              />
+              <div className="testi-author">
+                <div className="testi-avatar">&#128100;</div>
+                <div>
+                  <div className="testi-name">Rajesh &amp; Priya Kumar</div>
+                  <div className="testi-role">The Summit Estate, Chennai · 2024</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    });
+
+    const Contact = memo(() => {
+      const [infoRef,  infoInView]  = useInView(0.1);
+      const [formRef,  formInView]  = useInView(0.1);
+      const [card1Ref, card1InView] = useInView(0.1);
+      const [card2Ref, card2InView] = useInView(0.1);
+      const [card3Ref, card3InView] = useInView(0.1);
+      const [hdRef,    hdInView]    = useInView();
+      const [form, setForm] = useState({ fn:'',ln:'',email:'',phone:'',type:'',msg:'' });
+      const [sent, setSent] = useState(false);
+      const onChange = useCallback(e => setForm(prev => ({ ...prev, [e.target.name]: e.target.value })), []);
+      const onSubmit = useCallback(e => {
+        e.preventDefault(); setSent(true);
+        setTimeout(() => setSent(false), 3200);
+      }, []);
+      return (
+        <section id="contact">
+          <div className="contact-grid">
+            <div className={'contact-info-wrap' + (infoInView ? ' visible' : '')} ref={infoRef}>
+              <Eyebrow text="Get In Touch" inView={hdInView} ref={hdRef} />
+              <SectionTitle lines={["Let's Build",'Together']} inView={infoInView} />
+              <WordSplit
+                text="Ready to build your dream home? Our team is here to guide you every step of the way — from first conversation to final handover."
+                inView={infoInView} Tag="p" className="sec-body" style={{ marginTop:20 }}
+              />
+              {[
+                { ref: card1Ref, inView: card1InView, delay: 0,   icon:'📍', lbl:'Visit Us',  val:<>42 Architects Avenue, Anna Nagar<br/>Chennai — 600 040</> },
+                { ref: card2Ref, inView: card2InView, delay: 120, icon:'📞', lbl:'Call Us',   val:'+91 98765 43210' },
+                { ref: card3Ref, inView: card3InView, delay: 240, icon:'✉️', lbl:'Email Us',  val:'hello@archibuild.in' },
+              ].map((c, i) => (
+                <div
+                  key={i}
+                  className={'contact-card' + (c.inView ? ' card-visible' : '')}
+                  ref={c.ref}
+                  style={{ transitionDelay: c.delay + 'ms' }}
+                >
+                  <div className="contact-icon">{c.icon}</div>
+                  <div>
+                    <div className="contact-lbl">{c.lbl}</div>
+                    <div className="contact-val">{c.val}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className={'contact-form-wrap' + (formInView ? ' visible' : '')} ref={formRef}>
+              <div className="form-card">
+                <Eyebrow text="Send Enquiry" inView={formInView} style={{ marginBottom:24 }} />
+                <form onSubmit={onSubmit}>
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label htmlFor="fn">First Name</label>
+                      <input id="fn" name="fn" type="text" placeholder="Rajesh" value={form.fn} onChange={onChange} />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="ln">Last Name</label>
+                      <input id="ln" name="ln" type="text" placeholder="Kumar" value={form.ln} onChange={onChange} />
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="email">Email Address</label>
+                    <input id="email" name="email" type="email" placeholder="hello@email.com" value={form.email} onChange={onChange} />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="phone">Phone Number</label>
+                    <input id="phone" name="phone" type="tel" placeholder="+91 98765 43210" value={form.phone} onChange={onChange} />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="type">Project Type</label>
+                    <input id="type" name="type" type="text" placeholder="Villa / Bungalow / Apartment..." value={form.type} onChange={onChange} />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="msg">Your Message</label>
+                    <textarea id="msg" name="msg" placeholder="Tell us about your dream home..." value={form.msg} onChange={onChange} />
+                  </div>
+                  <button type="submit" className={'submit-btn' + (sent ? ' sent' : '')}>
+                    {sent ? 'Message Sent!' : <>Send Enquiry <span>→</span></>}
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    });
+
+    const Footer = memo(() => (
+      <footer>
+        <div className="footer-logo">Archi <span>Build</span></div>
+        <div className="footer-links">
+          {['Instagram','LinkedIn','Houzz'].map(s => <a key={s} href="#">{s}</a>)}
+        </div>
+      </footer>
+    ));
+
     const Watermark = memo(() => (
       <div className="footer-watermark">
-        <a href="https://artixo-official.netlify.app" target="_blank" rel="noopener noreferrer" className="footer-watermark-link"><img src="./artixo_logo_gradient.png" alt="Artixo" /></a>
-        <p className="footer-watermark-text">Designed &amp; crafted by{' '}
-          <a href="https://artixo-official.netlify.app" target="_blank" rel="noopener noreferrer"><span className="brand">Artixo</span></a>
-          {' '}·{' '}© 2026 All rights reserved.</p></div>));
+        <a href="https://artixo-official.netlify.app" target="_blank" rel="noopener noreferrer" className="footer-watermark-link">
+          <svg viewBox="0 0 120 32" width="90" height="24" xmlns="http://www.w3.org/2000/svg" aria-label="Artixo"><defs><linearGradient id="ag" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor="#b8922a"/><stop offset="50%" stopColor="#d4a843"/><stop offset="100%" stopColor="#b8922a"/></linearGradient></defs><text x="0" y="23" fontFamily="Cinzel,serif" fontSize="18" fontWeight="700" letterSpacing="3" fill="url(#ag)">ARTIXO</text></svg>
+        </a>
+        <p className="footer-watermark-text">
+          Designed &amp; crafted by{' '}
+          <a href="https://artixo-official.netlify.app" target="_blank" rel="noopener noreferrer">
+            <span className="brand">Artixo</span>
+          </a>
+          {' '}·{' '}© 2026 All rights reserved.
+        </p>
+      </div>
+    ));
+
     function App() {
-      const [loaderDone, setLoaderDone] = useState(false); const [navScrolled, setNavScrolled] = useState(false);
-      useEffect(() => { const t = setTimeout(() => setLoaderDone(true), 2100); return () => clearTimeout(t); }, []);
-      useEffect(() => { const handle = () => setNavScrolled(window.scrollY > 60);
-        window.addEventListener('scroll', handle, { passive: true }); return () => window.removeEventListener('scroll', handle); }, []);
-      return (<><Loader show={!loaderDone} /><Cursor /><Navbar scrolled={navScrolled} /><Hero loaderDone={loaderDone} />
-        <Stats /><Services /><ParallaxBand /><Process /><Projects /><Testimonial /><Contact /><Footer /><Watermark /></>); }
+      const [loaderDone,  setLoaderDone]  = useState(false);
+      const [navScrolled, setNavScrolled] = useState(false);
+      useEffect(() => {
+        const t = setTimeout(() => setLoaderDone(true), 2100);
+        return () => clearTimeout(t);
+      }, []);
+      useEffect(() => {
+        const handle = () => setNavScrolled(window.scrollY > 60);
+        window.addEventListener('scroll', handle, { passive: true });
+        return () => window.removeEventListener('scroll', handle);
+      }, []);
+      return (
+        <>
+          <Loader      show={!loaderDone} />
+          <Cursor />
+          <Navbar      scrolled={navScrolled} />
+          <Hero        loaderDone={loaderDone} />
+          <Stats />
+          <Services />
+          <ParallaxBand />
+          <Process />
+          <Projects />
+          <Testimonial />
+          <Contact />
+          <Footer />
+          <Watermark />
+        </>
+      );
+    }
+
     ReactDOM.createRoot(document.getElementById('root')).render(<App />);
   </script>
 </body>
