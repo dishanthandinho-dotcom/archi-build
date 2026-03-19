@@ -399,7 +399,7 @@
       return (
         <section id="hero" ref={sectionRef}>
           <div className="hero-video-wrap" ref={wrapRef}>
-            <div id="bgVideo" />
+            <video id="bgVideo" ref={videoRef} src="./background.mp4" autoPlay muted loop playsInline />
           </div>
           <div className="hero-overlay" />
           <div className="hero-fade-bottom" />
@@ -520,7 +520,7 @@
       return (
         <div id="parallax-band" ref={bandRef}>
           <div className="par-video-wrap" ref={wrapRef}>
-            <div id="parallaxVideo" />
+            <video id="parallaxVideo" src="./background.mp4" autoPlay muted loop playsInline />
           </div>
           <div className="par-overlay">
             <div className={'par-content' + (contInView ? ' visible' : '')} ref={contRef}>
